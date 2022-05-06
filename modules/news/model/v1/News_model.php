@@ -86,4 +86,19 @@ class News_model extends Main_model
 			return ['message' => 'fail to add'];
 		}
 	}
+
+
+
+	public function addCommentForNews($body, $newsId)
+	{
+		$db = DB::getInstance();
+		$sql = "INSERT INTO `comment` (`body`, `created_at`, `news_id`) VALUES('". $body . "','" . date('Y-m-d') . "','" . $newsId . "')";
+		$db->exec($sql);
+
+		if($this->db->exec($sql)) {
+			return ['message' => 'comment added'];
+		} else {
+			return ['message' => 'comment fail'];
+		}
+	}
 }

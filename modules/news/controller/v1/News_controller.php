@@ -89,4 +89,29 @@ class News_controller extends Main_controller
                 array('Content-Type: application/json', 'HTTP/1.1 422 Unprocessable Entity')
             );
 	}
+
+
+
+	public function comment($newsID)
+	{
+		$requestMethod = $_SERVER["REQUEST_METHOD"];
+
+		if ($requestMethod == 'POST') {
+			$payload = json_decode(file_get_contents('php://input'), true);
+
+			if(!isset($payload['body'])) {
+				return $this->sendOutput(json_encode(array('error' => 'Missing Param')), 
+	                array('Content-Type: application/json', 'HTTP/1.1 422 Unprocessable Entity')
+	            );
+			}
+
+			$data = $this->db->addCommentForNews($payload['body'], $newsID);
+
+			return $this->sendOutput(json_encode($data), array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
+		} 
+
+		return $this->sendOutput(json_encode(array('error' => 'Method not supported')), 
+                array('Content-Type: application/json', 'HTTP/1.1 422 Unprocessable Entity')
+            );
+	}
 }

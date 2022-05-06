@@ -6,6 +6,9 @@ Technical Exam on Eastvantage
   - i create REST-API for news, separation between client and server, the protocol makes it easy for developments across a project to take place independently, if we decided to integrate it with other platform like mobile app this is ready for it.
 
   http://{{api-url}}/api.php/news/getnews
+  http://{{api-url}}/api.php/news/upsertnews
+  http://{{api-url}}/api.php/news/delete/{{newsID}}
+  http://{{api-url}}/api.php/news/comment/{{newsID}}
 
   - I apply HMVC (Hierarchical model–view–controller) structure for modules, so its more maintainable, v1 stands for version of REST-API if any big impact changes on the endpoint i suggest to create v2 on the module in that way old endpoint will remain. 
 
